@@ -1,0 +1,24 @@
+from django.contrib import admin
+from .models import *
+
+
+# Register your models here.
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'interest', 'choice')
+    search_fields = ('text',)
+
+    # queryset 是默认的结果，search_term 是在后台搜索的关键词
+    def get_search_results(self, request, queryset, search_term):
+        queryset, use_distinct = super(QuestionAdmin, self).get_search_results(request, queryset, search_term)
+        try:
+            search_term_as_int = int(search_term)
+            queryset |= self.model.objects.filter(age=search_term_as_int)
+        except:
+            pass
+        return queryset, use_distinct
+
+
+@admin.register(Interest)
+class InterestAdmin(admin.ModelAdmin):
+    list_display = ('name',)

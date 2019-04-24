@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>霍兰德职业兴趣测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="shortcut icon" href="{% static 'holland_test/image/favicon.ico' %}"/>
+    <link rel="bookmark" href="{% static 'holland_test/image/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'holland_test/css/main.css' %}"/>
+</head>
+<body>
+<form method="post" action="/evaluation/result/">
+    {% csrf_token %}
+    <table>
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>题目</th>
+            <th>选项</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in lst %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.text }}</td>
+                <td>
+                    <input type="radio" id="yes-{{ i.id }}" name="choice-{{ i.id }}" value="1">
+                    <label for="yes-{{ i.id }}">是的</label>
+                    <input type="radio" id="no-{{ i.id }}" name="choice-{{ i.id }}" value="0">
+                    <label for="no-{{ i.id }}">不是</label>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="col-12">
+        <ul class="actions">
+            <li><input type="submit" value="提交" class="primary"></li>
+            <li><input type="reset" value="重置"></li>
+        </ul>
+    </div>
+</form>
+<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="{% static 'holland_test/js/browser.min.js' %}"></script>
+<script src="{% static 'holland_test/js/breakpoints.min.js' %}"></script>
+<script src="{% static 'holland_test/js/util.js' %}"></script>
+<script src="{% static 'holland_test/js/main.js' %}"></script>
+</body>
+</html>

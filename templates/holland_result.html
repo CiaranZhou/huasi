@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>霍兰德职业兴趣测试结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="shortcut icon" href="{% static 'holland_test/image/favicon.ico' %}"/>
+    <link rel="bookmark" href="{% static 'holland_test/image/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'holland_test/css/main.css' %}"/>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+</head>
+<body>
+<p>你的霍兰德类型是：{{ result }}</p>
+{{ radar|safe }}
+</body>
+</html>

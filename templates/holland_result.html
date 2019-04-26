@@ -11,7 +11,12 @@
     <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
 </head>
 <body>
-<p>你的霍兰德类型是：{{ result }}</p>
+<span>你的霍兰德类型是：</span>
+{% for i in result %}
+    <span>{{ i }}</span>
+{% empty %}
+    <span>本次测试不准确</span>
+{% endfor %}
 {{ radar|safe }}
 </body>
 </html>

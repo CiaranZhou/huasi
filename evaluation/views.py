@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators import csrf
 from .models import *
+from itertools import permutations
 from pyecharts import Radar
 
 
@@ -17,14 +18,14 @@ def holland_result(request):
     if request.POST:
         # 判断是否完成
         for i in range(60):
-            if 'choice-'+str(i+1) not in request.POST:
+            if 'choice-' + str(i + 1) not in request.POST:
                 ctx['result'] = '您没有完成全部题目，我们无法进行评价'
                 return render(request, 'holland_result.html', ctx)
         # 如果完成了则返回对应的结果
         m_data = Question.objects.order_by('id')
         result = {'常规型C': 0, '现实型R': 0, '研究型I': 0, '管理型E': 0, '社会型S': 0, '艺术型A': 0}
         for i in range(60):
-            if m_data[i].choice == int(request.POST['choice-'+str(i+1)]):
+            if m_data[i].choice == int(request.POST['choice-' + str(i + 1)]):
                 result[m_data[i].interest.name] += 1
         # 生成雷达图
         radar = Radar('你的兴趣分布图')
@@ -37,11 +38,24 @@ def holland_result(request):
         radar.add('', values)
         # 生成霍兰德类型
         s = sorted(result, key=result.__getitem__, reverse=True)
-        for i in range(3):
-            if result[s[i]] == 0:
-                break
-        s = ''.join([i[-1] for i in s[:3]])
-        return render(request, 'holland_result.html', {'result': s, 'radar': radar.render_embed()})
+        if result[s[2]] == result[s[3]]:
+            # code = ['本次测试不准确']
+            code = []
+        else:
+            code = []
+            t = [i[-1] for i in s[:3]]
+            if result[s[0]] == result[s[1]] == result[s[2]]:
+                for i in permutations(t[:3], ):
+                    code.append(''.join(i))
+            elif result[s[0]] == result[s[1]]:
+                for i in permutations(t[:2]):
+                    i = i + (t[2],)
+                    code.append(''.join(i))
+            elif result[s[1]] == result[s[2]]:
+                for i in permutations(t[:2]):
+                    i = (t[0],) + i
+                    code.append(''.join(i))
+        return render(request, 'holland_result.html', {'result': code, 'radar': radar.render_embed()})
     else:
         message = '非法访问'
         return HttpResponse(message)

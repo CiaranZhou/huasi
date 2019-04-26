@@ -67,10 +67,8 @@ class RecommendAdmin(admin.ModelAdmin):
             pass
         return queryset, use_distinct
 
-    def education_level(self, obj):
-        return obj.education_level.name
-
     list_display = (
+        'id',
         'profession_code',
         'name',
         'core_course',

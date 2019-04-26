@@ -10,7 +10,11 @@ sheet = fr.sheet_by_index(0)
 #     i += '\n'
 #     fl.write(i)
 # fl.close()
-s = sheet.col_values(9)[1:]
-# for i in s:
-#     print(i)
-print(max(map(len, s)))
+a = sheet.col_values(0)[1:]
+b = sheet.col_values(1)[1:]
+c = sheet.col_values(2)[1:]
+d = set()
+for i in range(len(b)):
+    if not b[i] in d:
+        d.add(b[i])
+        print(a[i], b[i], int(c[i]))

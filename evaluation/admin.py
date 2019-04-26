@@ -26,16 +26,21 @@ class InterestAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = (
+        'id',
+        'name',
+    )
 
 
 @admin.register(SubCategory)
 class SubCategoryAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'category',
         'name',
-        'id',
+        'subject_code',
     )
+    list_per_page = 20
 
 
 @admin.register(PsyCode)
@@ -61,6 +66,9 @@ class RecommendAdmin(admin.ModelAdmin):
         except:
             pass
         return queryset, use_distinct
+
+    def education_level(self, obj):
+        return obj.education_level.name
 
     list_display = (
         'profession_code',

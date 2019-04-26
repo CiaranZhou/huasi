@@ -53,10 +53,10 @@ class Recommend(models.Model):
         return self.name
 
     name = models.CharField(max_length=15, verbose_name="专业名称")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     profession_code = models.CharField(max_length=10, verbose_name="专业代码")
     psy_code = models.ManyToManyField(PsyCode)
-    education_level = models.ManyToManyField(EducationLevel, verbose_name="学历层次")
+    education_level = models.ManyToManyField(EducationLevel, verbose_name="学历层次", blank=True)
     core_course = models.CharField(max_length=300, verbose_name="专业核心课程")
     high_school_curriculum = models.CharField(max_length=30, verbose_name="对应高中课程")
     career_direction = models.CharField(max_length=350, verbose_name="对应职业方向")

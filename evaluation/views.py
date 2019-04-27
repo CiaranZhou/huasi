@@ -52,7 +52,7 @@ def holland_result(request):
                     i = i + (t[2],)
                     code.append(''.join(i))
             elif result[s[1]] == result[s[2]]:
-                for i in permutations(t[:2]):
+                for i in permutations(t[1:]):
                     i = (t[0],) + i
                     code.append(''.join(i))
         return render(request, 'holland_result.html', {'result': code, 'radar': radar.render_embed()})

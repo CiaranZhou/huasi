@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.decorators import csrf
+# from django.views.decorators import csrf
 from .models import *
+from functools import reduce
 from itertools import permutations
 from pyecharts import Radar
 
@@ -55,7 +56,21 @@ def holland_result(request):
                 for i in permutations(t[1:]):
                     i = (t[0],) + i
                     code.append(''.join(i))
-        return render(request, 'holland_result.html', {'result': code, 'radar': radar.render_embed()})
+        recommend = []
+        for i in code:
+            recommend.extend([i, i[:2], i[1:]])
+        recommend = PsyCode.objects.filter(code__in=recommend)
+        recommend = reduce(lambda x, y: x|y, [i.recommend_set.all() for i in recommend])
+        for i in recommend:
+            print(i)
+        return render(
+            request,
+            'holland_result.html',
+            {'result': code,
+             'recommend': recommend,
+             'radar': radar.render_embed()
+             }
+        )
     else:
         message = '非法访问'
         return HttpResponse(message)

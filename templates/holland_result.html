@@ -18,5 +18,43 @@
     <span>本次测试不准确</span>
 {% endfor %}
 {{ radar|safe }}
+<table>
+    <thead>
+    <tr>
+        <th>专业门类</th>
+        <th>专业子类</th>
+        <th>专业名</th>
+        <th>学历层次</th>
+        <th>专业核心课程</th>
+        <th>对应高中课程</th>
+        <th>对应职业方向</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in recommend %}
+        <tr>
+            <td>{{ i.sub_category.category }}</td>
+            <td>{{ i.sub_category }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.education_level. }}</td>
+            <td>{{ i.core_course }}</td>
+            <td>{{ i.high_school_curriculum }}</td>
+            <td>{{ i.career_direction }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{#{% for i in recommend %}#}
+{#    <div>#}
+{#    <p>{{ i.name }}</p>#}
+{#    <p></p>#}
+{#    <p>{{ i.education_level }}</p>#}
+{#    <p>{{ i.core_course }}</p>#}
+{#    <p>{{ i.high_school_curriculum }}</p>#}
+{#    <p>{{ i.career_direction }}</p>#}
+{#{% empty %}#}
+{#    <p>没有相应的推荐</p>#}
+{#{% endfor %}#}
+</div>
 </body>
 </html>

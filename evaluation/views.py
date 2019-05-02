@@ -60,9 +60,7 @@ def holland_result(request):
         for i in code:
             recommend.extend([i, i[:2], i[1:]])
         recommend = PsyCode.objects.filter(code__in=recommend)
-        recommend = reduce(lambda x, y: x|y, [i.recommend_set.all() for i in recommend])
-        for i in recommend:
-            print(i)
+        recommend = reduce(lambda x, y: x | y, [i.recommend_set.all() for i in recommend])
         return render(
             request,
             'holland_result.html',

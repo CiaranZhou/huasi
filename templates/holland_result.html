@@ -9,52 +9,116 @@
     <link rel="bookmark" href="{% static 'holland_test/image/favicon.ico' %}"/>
     <link rel="stylesheet" href="{% static 'holland_test/css/main.css' %}"/>
     <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="{% static 'holland_test/css/noscript.css' %}"/>
+    </noscript>
 </head>
-<body>
-<span>你的霍兰德类型是：</span>
-{% for i in result %}
-    <span>{{ i }}</span>
-{% empty %}
-    <span>本次测试不准确</span>
-{% endfor %}
-{{ radar|safe }}
-<table>
-    <thead>
-    <tr>
-        <th>专业门类</th>
-        <th>专业子类</th>
-        <th>专业名</th>
-        <th>学历层次</th>
-        <th>专业核心课程</th>
-        <th>对应高中课程</th>
-        <th>对应职业方向</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for i in recommend %}
-        <tr>
-            <td>{{ i.sub_category.category }}</td>
-            <td>{{ i.sub_category }}</td>
-            <td>{{ i.name }}</td>
-            <td>{{ i.education_level. }}</td>
-            <td>{{ i.core_course }}</td>
-            <td>{{ i.high_school_curriculum }}</td>
-            <td>{{ i.career_direction }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-{#{% for i in recommend %}#}
-{#    <div>#}
-{#    <p>{{ i.name }}</p>#}
-{#    <p></p>#}
-{#    <p>{{ i.education_level }}</p>#}
-{#    <p>{{ i.core_course }}</p>#}
-{#    <p>{{ i.high_school_curriculum }}</p>#}
-{#    <p>{{ i.career_direction }}</p>#}
-{#{% empty %}#}
-{#    <p>没有相应的推荐</p>#}
-{#{% endfor %}#}
+
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper" class="fade-in">
+
+    <!-- Intro -->
+    <div id="intro">
+        <h1>华偲<br/>
+            心理</h1>
+        <p>A free, fully responsive HTML5 + CSS3 site template designed by <a
+                href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br/>
+            and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
+        <ul class="actions">
+            <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <a href="#" class="logo">华偲心理</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="nav">
+        <ul class="links">
+            <li><a href="#">心理评测</a></li>
+            <li class="active"><a href="#">评测结果</a></li>
+            <li><a href="#">评测建议</a></li>
+        </ul>
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+        <!-- Featured Post -->
+        <article class="post featured">
+            <header class="major">
+                <span class="date">April 25, 2017</span>
+                <h2><a href="#">霍兰德职业兴趣测试</a></h2>
+                <p>霍兰德职业兴趣自测是由美国职业指导专家霍兰德根据他本人大量的职业咨询经验及其职业类型理论编制的测评工具。</p>
+            </header>
+            <ul class="actions special">
+                <li><a href="#" class="button large">Full Story</a></li>
+            </ul>
+        </article>
+
+        <span>你的霍兰德类型是：</span>
+        {% for i in result %}
+            <span>{{ i }}</span>
+        {% empty %}
+            <span>本次测试不准确</span>
+        {% endfor %}
+        {{ radar|safe }}
+        <table>
+            <thead>
+            <tr>
+                <th>专业门类</th>
+                <th>专业子类</th>
+                <th>专业名</th>
+                <th>学历层次</th>
+                <th>专业核心课程</th>
+                <th>对应高中课程</th>
+                <th>对应职业方向</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in recommend %}
+                <tr>
+                    <td>{{ i.sub_category.category }}</td>
+                    <td>{{ i.sub_category }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.education_level. }}</td>
+                    <td>{{ i.core_course }}</td>
+                    <td>{{ i.high_school_curriculum }}</td>
+                    <td>{{ i.career_direction }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Copyright -->
+    <div id="copyright">
+        <ul>
+            <li>&copy; Untitled</li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+
 </div>
+
+<!-- Scripts -->
+<script src="{% static 'holland_test/js/jquery.min.js' %}"></script>
+<script src="{% static 'holland_test/js/jquery.scrollex.min.js' %}"></script>
+<script src="{% static 'holland_test/js/jquery.scrolly.min.js' %}"></script>
+<script src="{% static 'holland_test/js/browser.min.js' %}"></script>
+<script src="{% static 'holland_test/js/breakpoints.min.js' %}"></script>
+<script src="{% static 'holland_test/js/util.js' %}"></script>
+<script src="{% static 'holland_test/js/main.js' %}"></script>
+
 </body>
+
 </html>

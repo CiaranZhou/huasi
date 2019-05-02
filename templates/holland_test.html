@@ -3,49 +3,119 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>霍兰德职业兴趣测试</title>
+    <title>华偲心理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="shortcut icon" href="{% static 'holland_test/image/favicon.ico' %}"/>
     <link rel="bookmark" href="{% static 'holland_test/image/favicon.ico' %}"/>
     <link rel="stylesheet" href="{% static 'holland_test/css/main.css' %}"/>
+    <noscript>
+        <link rel="stylesheet" href="{% static 'holland_test/css/noscript.css' %}"/>
+    </noscript>
 </head>
-<body>
-<form method="post" action="/evaluation/result/">
-    {% csrf_token %}
-    <table>
-        <thead>
-        <tr>
-            <th>编号</th>
-            <th>题目</th>
-            <th>选项</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in lst %}
-            <tr>
-                <td>{{ i.id }}</td>
-                <td>{{ i.text }}</td>
-                <td>
-                    <input type="radio" id="yes-{{ i.id }}" name="choice-{{ i.id }}" value="1">
-                    <label for="yes-{{ i.id }}">是的</label>
-                    <input type="radio" id="no-{{ i.id }}" name="choice-{{ i.id }}" value="0">
-                    <label for="no-{{ i.id }}">不是</label>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="col-12">
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper" class="fade-in">
+
+    <!-- Intro -->
+    <div id="intro">
+        <h1>华偲<br/>
+            心理</h1>
+        <p>A free, fully responsive HTML5 + CSS3 site template designed by <a
+                href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br/>
+            and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
         <ul class="actions">
-            <li><input type="submit" value="提交" class="primary"></li>
-            <li><input type="reset" value="重置"></li>
+            <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
         </ul>
     </div>
-</form>
+
+    <!-- Header -->
+    <header id="header">
+        <a href="#" class="logo">华偲心理</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="nav">
+        <ul class="links">
+            <li class="active"><a href="#">心理评测</a></li>
+            <li><a href="#">评测结果</a></li>
+            <li><a href="#">评测建议</a></li>
+        </ul>
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+        <!-- Featured Post -->
+        <article class="post featured">
+            <header class="major">
+                <span class="date">April 25, 2017</span>
+                <h2><a href="#">霍兰德职业兴趣测试</a></h2>
+                <p>霍兰德职业兴趣自测是由美国职业指导专家霍兰德根据他本人大量的职业咨询经验及其职业类型理论编制的测评工具。</p>
+            </header>
+            <ul class="actions special">
+                <li><a href="#" class="button large">Full Story</a></li>
+            </ul>
+        </article>
+
+        <form method="post" action="/evaluation/result/">
+            {% csrf_token %}
+            <table>
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>题目</th>
+                    <th>选项</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in lst %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.text }}</td>
+                        <td>
+                            <input type="radio" id="yes-{{ i.id }}" name="choice-{{ i.id }}" value="1">
+                            <label for="yes-{{ i.id }}">是的</label>
+                            <input type="radio" id="no-{{ i.id }}" name="choice-{{ i.id }}" value="0">
+                            <label for="no-{{ i.id }}">不是</label>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-12">
+                <ul class="actions">
+                    <li><input type="submit" value="提交" class="primary"></li>
+                    <li><input type="reset" value="重置"></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <!-- Copyright -->
+    <div id="copyright">
+        <ul>
+            <li>&copy; Untitled</li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- Scripts -->
 <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="{% static 'holland_test/js/jquery.scrollex.min.js' %}"></script>
+<script src="{% static 'holland_test/js/jquery.scrolly.min.js' %}"></script>
 <script src="{% static 'holland_test/js/browser.min.js' %}"></script>
 <script src="{% static 'holland_test/js/breakpoints.min.js' %}"></script>
 <script src="{% static 'holland_test/js/util.js' %}"></script>
 <script src="{% static 'holland_test/js/main.js' %}"></script>
+
 </body>
+
 </html>

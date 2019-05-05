@@ -3,17 +3,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>霍兰德职业兴趣测试结果</title>
+    <title>{{ lst.name }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="shortcut icon" href="{% static 'holland_test/image/favicon.ico' %}"/>
     <link rel="bookmark" href="{% static 'holland_test/image/favicon.ico' %}"/>
     <link rel="stylesheet" href="{% static 'holland_test/css/main.css' %}"/>
-    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
     <noscript>
         <link rel="stylesheet" href="{% static 'holland_test/css/noscript.css' %}"/>
     </noscript>
 </head>
-
 <body class="is-preload">
 
 <!-- Wrapper -->
@@ -37,8 +35,8 @@
     <nav id="nav">
         <ul class="links">
             <li><a href="/evaluation/">心理评测</a></li>
-            <li class="active"><a href="/evaluation/result/">评测结果</a></li>
-            <li><a href="/profession/">推荐专业</a></li>
+            <li><a href="/evaluation/result/">评测结果</a></li>
+            <li class="active"><a href="/profession/">推荐专业</a></li>
         </ul>
         <ul class="icons">
             <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -57,57 +55,33 @@
                 <p>霍兰德职业兴趣自测是由美国职业指导专家霍兰德根据他本人大量的职业咨询经验及其职业类型理论编制的测评工具。</p>
             </header>
             <ul class="actions special">
-                <li><a href="#result" class="button large">查看结果</a></li>
+                <li><a href="#profession" class="button large">查看专业</a></li>
             </ul>
         </article>
 
-        <div id="result" class="row">
-            <div class="col-6 col-12-small">
-                <h3>你的霍兰德类型是：</h3>
-                <ul>
-                    {% for i in result %}
-                        <li>{{ i }}</li>
-                    {% empty %}
-                        <li>本次测试不准确</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-6 col-12-small">
-                <h3>你的兴趣分布图</h3>
-                {{ radar|safe }}
-            </div>
-        </div>
-        <div class="table-wrapper">
-            <h3>对于你的专业建议</h3>
-            <table class="alt">
-                <thead>
-                <tr>
-                    <th>专业门类</th>
-                    <th>专业子类</th>
-                    <th>专业名</th>
-                    <th>学历层次</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for i in recommend %}
-                    <tr>
-                        <td>{{ i.sub_category.category }}</td>
-                        <td>{{ i.sub_category }}</td>
-                        <td>
-                            <a href="/evaluation/profession/{{ i.id }}">{{ i.name }}</a>
-                        </td>
-                        <td>
-                            {% for j in i.education_level.all %}
-                                {{ j.name }}&nbsp;
-                            {% empty %}
-                                暂无收录
-                            {% endfor %}
-                        </td>
-                    </tr>
+        <h2 id="profession">{{ lst.name }}</h2>
+        <dl>
+            <dt>学科门类</dt>
+            <dd>{{ lst.sub_category.category }}</dd>
+            <dt>所属子类</dt>
+            <dd>{{ lst.sub_category }}</dd>
+            <dt>专业代码</dt>
+            <dd>{{ lst.profession_code }}</dd>
+            <dt>学历层次</dt>
+            <dd>
+                {% for j in lst.education_level.all %}
+                    {{ j.name }}&nbsp;
+                {% empty %}
+                    暂无收录
                 {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            </dd>
+            <dt>专业核心课程</dt>
+            <dd>{{ lst.core_course }}</dd>
+            <dt>对应高中课程</dt>
+            <dd>{{ lst.high_school_curriculum }}</dd>
+            <dt>对应职业方向</dt>
+            <dd>{{ lst.career_direction }}</dd>
+        </dl>
     </div>
 
     <!-- Copyright -->
@@ -121,7 +95,7 @@
 </div>
 
 <!-- Scripts -->
-<script src="{% static 'holland_test/js/jquery.min.js' %}"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
 <script src="{% static 'holland_test/js/jquery.scrollex.min.js' %}"></script>
 <script src="{% static 'holland_test/js/jquery.scrolly.min.js' %}"></script>
 <script src="{% static 'holland_test/js/browser.min.js' %}"></script>

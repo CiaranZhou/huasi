@@ -19,11 +19,8 @@
 
     <!-- Intro -->
     <div id="intro">
-        <h1>华偲<br/>
-            心理</h1>
-        <p>A free, fully responsive HTML5 + CSS3 site template designed by <a
-                href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br/>
-            and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
+        <h1>华偲心理</h1>
+        <p>我们是“华偲心理”，以华东师范大学心理与认知科学学院学生为主创立的互联网心理平台。</p>
         <ul class="actions">
             <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
         </ul>
@@ -37,9 +34,9 @@
     <!-- Nav -->
     <nav id="nav">
         <ul class="links">
-            <li class="active"><a href="#">心理评测</a></li>
-            <li><a href="#">评测结果</a></li>
-            <li><a href="#">评测建议</a></li>
+            <li class="active"><a href="/evaluation/">心理评测</a></li>
+            <li><a href="/evaluation/result/">评测结果</a></li>
+            <li><a href="/profession/">推荐专业</a></li>
         </ul>
         <ul class="icons">
             <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -54,16 +51,15 @@
         <!-- Featured Post -->
         <article class="post featured">
             <header class="major">
-                <span class="date">April 25, 2017</span>
                 <h2><a href="#">霍兰德职业兴趣测试</a></h2>
                 <p>霍兰德职业兴趣自测是由美国职业指导专家霍兰德根据他本人大量的职业咨询经验及其职业类型理论编制的测评工具。</p>
             </header>
             <ul class="actions special">
-                <li><a href="#" class="button large">Full Story</a></li>
+                <li><a href="#evaluation" class="button large">开始测试</a></li>
             </ul>
         </article>
 
-        <form method="post" action="/evaluation/result/">
+        <form id="evaluation" method="post" action="/evaluation/result/">
             {% csrf_token %}
             <table>
                 <thead>
@@ -100,7 +96,7 @@
     <!-- Copyright -->
     <div id="copyright">
         <ul>
-            <li>&copy; Untitled</li>
+            <li>&copy; 华偲心理</li>
             <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
         </ul>
     </div>

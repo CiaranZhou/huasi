@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 # from django.views.decorators import csrf
 from .models import *
 from functools import reduce
@@ -29,14 +29,16 @@ def holland_result(request):
             if m_data[i].choice == int(request.POST['choice-' + str(i + 1)]):
                 result[m_data[i].interest.name] += 1
         # 生成雷达图
-        radar = Radar('你的兴趣分布图')
         c_schema = []
         values = [[]]
         for key, value in result.items():
             c_schema.append({'name': key, 'max': 10, 'min': 0})
             values[0].append(value)
-        radar.config(c_schema=c_schema)
-        radar.add('', values)
+        radar = (
+            Radar(width='20em', height='20em')
+            .config(c_schema=c_schema)
+            .add('', values, is_toolbox_show=False)
+        )
         # 生成霍兰德类型
         s = sorted(result, key=result.__getitem__, reverse=True)
         if result[s[2]] == result[s[3]]:
@@ -72,3 +74,16 @@ def holland_result(request):
     else:
         message = '非法访问'
         return HttpResponse(message)
+
+
+def profession(request, mark):
+    try:
+        pro = Recommend.objects.get(id=mark)
+        return render(
+            request,
+            'profession.html',
+            {'lst': pro
+             }
+        )
+    except Recommend.DoesNotExist:
+        raise Http404("该专业不存在")
